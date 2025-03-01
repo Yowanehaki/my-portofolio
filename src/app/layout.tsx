@@ -14,7 +14,7 @@ const montserrat = Montserrat({
 
 // Metadata for SEO
 export const metadata = {
-  title: "Hazart'site",
+  title: "Hazart's site",
   description: "Portofolio website for Hazart",
   icons: {
     icon: "mha.png",
