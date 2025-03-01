@@ -153,10 +153,10 @@ const skills: Skill[] = [
     relatedSkills: ["Version Control", "Collaboration", "CI/CD"]
   },
   {
-    name: "Laravel",
-    icon: "/icons/laravel-original.svg",
+    name: "Typescript",
+    icon: "/icons/typescript-original.svg",
     level: 75,
-    category: SkillCategory.TOOLS,
+    category: SkillCategory.FRONTEND,
     description: "Unit testing, component testing, and test-driven development.",
     yearStarted: 2020,
     color: "#C21325", // Warna merah Jest
