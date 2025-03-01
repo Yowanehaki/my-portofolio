@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
@@ -50,7 +49,7 @@ export default function About() {
           
             <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-xl mb-8 text-justify">
               My journey in web development began when I entered Institut Teknologi Sumatera (ITERA) in 2022. As a Software Engineer, 
-              I've been developing my skills and knowledge in creating responsive and interactive user interfaces.
+              Ive been developing my skills and knowledge in creating responsive and interactive user interfaces.
             </p>
             
             <div className="pt-3">

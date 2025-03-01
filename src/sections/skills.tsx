@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import skills from "@/data/skills";
-import Image from 'next/image';
-import Link from 'next/link';
 
 export default function Skills() {
   const [isVisible, setIsVisible] = useState(false);
@@ -64,7 +62,20 @@ export default function Skills() {
 }
 
 // Animated Skill Icon Component
-function SkillIcon({ skill, index, isVisible }) {
+// Define an interface for the skill object
+interface Skill {
+  icon: string;
+  name: string;
+}
+
+// Define props interface with explicit types
+interface SkillIconProps {
+  skill: Skill;
+  index: number;
+  isVisible: boolean;
+}
+
+function SkillIcon({ skill, index, isVisible }: SkillIconProps) {
   // Calculate staggered animation delay based on index
   const animationDelay = `${100 + (index * 50)}ms`;
   
