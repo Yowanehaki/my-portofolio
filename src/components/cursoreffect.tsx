@@ -11,7 +11,7 @@ interface Trail {
 
 const CursorTrailEffect: React.FC = () => {
   const [trails, setTrails] = useState<Trail[]>([]);
-  const requestRef = useRef<number>();
+  const requestRef = useRef<number | undefined>(undefined);
   const mousePosition = useRef({ x: 0, y: 0 });
   const trailsRef = useRef<Trail[]>([]);
   const maxTrails = 15; // Jumlah jejak maksimum
