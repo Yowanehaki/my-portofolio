@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image'; // Import Next.js Image component
 
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
-  const [imageScale, setImageScale] = useState(1); // Add this line to define imageScale
+  const [imageScale, setImageScale] = useState(0.8); // Changed initial value to 0.8 to match usage
   const skills = ['FE','IT Enthusiast','UI/UX'];
   
   useEffect(() => {
@@ -49,7 +50,7 @@ export default function About() {
           
             <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-xl mb-8 text-justify">
               My journey in web development began when I entered Institut Teknologi Sumatera (ITERA) in 2022. As a Software Engineer, 
-              Ive been developing my skills and knowledge in creating responsive and interactive user interfaces.
+              I&apos;ve been developing my skills and knowledge in creating responsive and interactive user interfaces.
             </p>
             
             <div className="pt-3">
@@ -75,13 +76,15 @@ export default function About() {
               {/* Foto dengan efek skala - reduced size */}
               <div 
                 className="relative flex items-center justify-center h-full"
-                style={{ transform: `scale(0.8)`, transition: 'transform 0.3s ease' }}
+                style={{ transform: `scale(${imageScale})`, transition: 'transform 0.3s ease' }}
                 onMouseEnter={() => setImageScale(0.85)} // Slightly larger on hover
                 onMouseLeave={() => setImageScale(0.8)}  // Return to smaller size
               >
-                <img 
+                <Image 
                   src="/Logo_ITERA.png" 
                   alt="Developer Campus" 
+                  width={320}
+                  height={320}
                   className="w-full h-auto max-w-xs object-contain z-10" 
                 />
               </div>

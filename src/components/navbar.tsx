@@ -2,14 +2,15 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image"; // Import Image component from next/image
 import { motion, AnimatePresence } from "framer-motion";
-import { usePathname } from "next/navigation";
+// Removed unused import: import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-  const pathname = usePathname();
+  // Removed unused variable: const pathname = usePathname();
 
   // Deteksi scroll untuk mengubah style navbar saat scrolling
   useEffect(() => {
@@ -101,22 +102,24 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           {/* Logo & Nama */}
-                  <Link href="/" className="flex items-center space-x-3 group">
-          <div className="relative">
-            <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-70 blur-sm group-hover:opacity-100 transition duration-300"></div>
-            <div className="relative w-10 h-10 rounded-lg flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-300 overflow-hidden">
-              <img 
-                src="/favicon.png" 
-                alt="HAZART Logo" 
-                className="w-full h-full object-cover"
-              />
+          <Link href="/" className="flex items-center space-x-3 group">
+            <div className="relative">
+              <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-70 blur-sm group-hover:opacity-100 transition duration-300"></div>
+              <div className="relative w-10 h-10 rounded-lg flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-300 overflow-hidden">
+                <Image 
+                  src="/favicon.png" 
+                  alt="HAZART Logo" 
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xl font-bold text-gray-800 dark:text-white tracking-tight">HAZART</span>
-            <span className="text-xs text-gray-500 dark:text-gray-400 -mt-1">portofolio</span>
-          </div>
-        </Link>
+            <div className="flex flex-col">
+              <span className="text-xl font-bold text-gray-800 dark:text-white tracking-tight">HAZART</span>
+              <span className="text-xs text-gray-500 dark:text-gray-400 -mt-1">portofolio</span>
+            </div>
+          </Link>
 
           {/* Menu Desktop */}
           <div className="hidden lg:flex items-center space-x-1">

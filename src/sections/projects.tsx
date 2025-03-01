@@ -1,16 +1,17 @@
 "use client"
 
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
+import Image from 'next/image';
 import projects from "@/data/projects";
 
 export default function Projects() {
-  const [activeProject, setActiveProject] = useState(null);
-  const [isHovering, setIsHovering] = useState(false);
+  // Removed unused state variables: activeProject and isHovering
   const containerRef = useRef(null);
 
-  const handleProjectHover = (id) => {
-    setActiveProject(id);
-    setIsHovering(true);
+  // Simplified handleProjectHover since we're not using the state variables
+  const handleProjectHover = () => {
+    // This function could be removed completely,
+    // but keeping it empty in case you want to add functionality later
   };
 
   return (
@@ -29,13 +30,15 @@ export default function Projects() {
             <div
               key={project.id}
               className="group relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
-              onMouseEnter={() => handleProjectHover(project.id)}
-              onMouseLeave={() => setIsHovering(false)}
+              onMouseEnter={() => handleProjectHover()}
+              onMouseLeave={() => handleProjectHover()}
             >
               <div className="relative h-48 overflow-hidden">
-                <img 
+                <Image 
                   src={project.image} 
                   alt={project.title} 
+                  width={400}
+                  height={200}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

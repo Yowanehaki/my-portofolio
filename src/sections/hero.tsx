@@ -1,15 +1,17 @@
 "use client"
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
+import Image from 'next/image';
 
 export default function Hero() {
   const [typedText, setTypedText] = useState('');
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [typingComplete, setTypingComplete] = useState(false);
   const [isErasing, setIsErasing] = useState(false);
-  const [imageScale, setImageScale] = useState(1.5); // Keeping your original scale
+  const imageScale = 1.5; // Removed state since it's not being changed
   
-  const textOptions = ['Hi, Im Mulfi Hazwi Artaf' ];
+  // Wrap textOptions in useMemo to avoid recreating on each render
+  const textOptions = useMemo(() => [' Hi, Im Mulfi Hazwi Artaf'], []);
   
   useEffect(() => {
     const fullText = textOptions[currentTextIndex];
@@ -84,9 +86,11 @@ export default function Hero() {
               className="relative flex items-center left-center h-full overflow-hidden rounded-full"
               style={{ transform: `scale(${imageScale})`, transition: 'transform 0.3s ease' }}
             >
-              <img 
+              <Image 
                 src="/test-Photoroom.png" 
                 alt="Developer" 
+                width={1200}
+                height={1200}
                 className="w-full h-auto object-cover z-10" 
               />
             </div>

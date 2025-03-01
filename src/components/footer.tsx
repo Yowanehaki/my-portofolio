@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 mb-10">
           {/* Column 1: About */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold mb-3 text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">Hazart's Site</h3>
+            <h3 className="text-lg font-bold mb-3 text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">Hazart&apos;s Site</h3>
             <p className="text-gray-300 text-sm leading-relaxed">
               Providing high-quality web design and development services to help your business grow in the digital world.
             </p>
@@ -67,7 +67,7 @@ export default function Footer() {
         {/* Bottom section */}
         <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-400">
           <p className="mb-4 sm:mb-0">
-            © {currentYear} Hazart's site. All Rights Reserved.
+            © {currentYear} Hazart&apos;s site. All Rights Reserved.
           </p>
           <div className="flex space-x-6">
             <Link href="/privacy" className="hover:text-white transition-colors duration-300">

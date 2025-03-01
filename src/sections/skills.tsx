@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image'; // Import Next.js Image component
 import skills from "@/data/skills";
 
 export default function Skills() {
@@ -92,11 +93,13 @@ function SkillIcon({ skill, index, isVisible }: SkillIconProps) {
           bg-white dark:bg-gray-800 shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105 overflow-hidden">
           
           {/* Floating Animation - Fill the entire container */}
-          <div className="animate-wiggle flex items-center justify-center w-full h-full">
-            <img 
+          <div className="animate-wiggle flex items-center justify-center w-full h-full relative">
+            <Image 
               src={skill.icon} 
               alt={skill.name} 
-              className="w-full h-full object-fill group-hover:animate-wiggle" 
+              width={96}
+              height={96}
+              className="w-full h-full object-contain group-hover:animate-wiggle" 
             />
           </div>
           
