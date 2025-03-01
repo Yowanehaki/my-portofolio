@@ -1,12 +1,12 @@
 "use client"
 
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 
 export default function Menfess() {
   const [submitted, setSubmitted] = useState(false);
   const [message, setMessage] = useState('');
   
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Normally, you would send the message to your backend here
     console.log('Menfess submitted:', message);
