@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image"; // Import Image component from next/image
-import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { motion, AnimatePresence, SVGMotionProps } from "framer-motion";
 // Removed unused import: import { usePathname } from "next/navigation";
 
 export default function Navbar() {
@@ -69,7 +69,7 @@ export default function Navbar() {
   };
 
   // Tombol hamburger animasi
-  const Path = props => (
+  const Path = (props: SVGMotionProps<SVGPathElement>) => (
     <motion.path
       fill="transparent"
       strokeWidth="2"
@@ -258,8 +258,8 @@ export default function Navbar() {
 }
 
 // Helper untuk icon pada mobile menu
-function getLinkIcon(section) {
-  switch (section) {
+function getLinkIcon(sections: string) {
+  switch (sections) {
     case 'home':
       return (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
