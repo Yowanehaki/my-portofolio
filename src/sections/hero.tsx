@@ -15,8 +15,8 @@ export default function Hero() {
   // Wrap textOptions in useMemo to avoid recreating on each render
   const textOptions = useMemo(() => [' Hi, Im Mulfi Hazwi Artaf'], []);
   
-  // Handle mouse movement for the image
-  const handleMouseMove = (e) => {
+  // Handle mouse movement for the image with proper typing
+  const handleMouseMove = (e: MouseEvent): void => {
     const { clientX, clientY } = e;
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
