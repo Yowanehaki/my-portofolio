@@ -1,10 +1,13 @@
 "use client"
 
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 export default function Menfess() {
   const [submitted, setSubmitted] = useState(false);
   const [message, setMessage] = useState('');
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
   
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,24 +21,43 @@ export default function Menfess() {
   };
 
   return (
-    <section id="menfess" className="py-16 bg-gradient-to-b from-purple-50 to-white dark:from-gray-900 dark:to-gray-800 overflow-hidden">
+    <section 
+      id="menfess" 
+      className="py-16 bg-gradient-to-b from-purple-50 to-white dark:from-gray-900 dark:to-gray-800 overflow-hidden"
+      ref={sectionRef}
+    >
       <div className="max-w-3xl mx-auto px-4 sm:px-6 relative">
         {/* Background elements */}
         <div className="absolute -top-12 -right-12 w-40 h-40 bg-purple-200 dark:bg-purple-900/30 rounded-full filter blur-xl opacity-60"></div>
         <div className="absolute -bottom-16 -left-16 w-56 h-56 bg-pink-200 dark:bg-pink-900/30 rounded-full filter blur-xl opacity-50"></div>
         
         <div className="relative">
-          <div className="text-center mb-8">
+          <motion.div 
+            className="text-center mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="text-3xl font-bold text-gray-800 dark:text-white inline-block">
               Send Menfess
-              <div className="h-1 w-24 bg-gradient-to-r from-purple-400 to-pink-500 mt-1 rounded-full mx-auto"></div>
+              <motion.div 
+                className="h-1 w-24 bg-gradient-to-r from-purple-400 to-pink-500 mt-1 rounded-full mx-auto"
+                initial={{ width: 0 }}
+                animate={isInView ? { width: 96 } : { width: 0 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+              ></motion.div>
             </h2>
             <p className="text-gray-600 dark:text-gray-300 mt-3 max-w-2xl mx-auto text-sm sm:text-base">
               Send an anonymous message to us. Share your thoughts without worrying about revealing your identity.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 sm:p-8 backdrop-blur-sm bg-opacity-80 dark:bg-opacity-80 border border-gray-100 dark:border-gray-700">
+          <motion.div 
+            className="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 sm:p-8 backdrop-blur-sm bg-opacity-80 dark:bg-opacity-80 border border-gray-100 dark:border-gray-700"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
             {/* Decorative elements */}
             <div className="absolute -top-4 -left-4 w-16 h-16 z-0">
               <div className="absolute w-full h-full bg-purple-400 dark:bg-purple-600 rounded-lg transform rotate-6 opacity-70"></div>
@@ -48,7 +70,12 @@ export default function Menfess() {
             
             <div className="relative z-10">
               {submitted ? (
-                <div className="min-h-48 flex flex-col items-center justify-center text-center p-4 py-8">
+                <motion.div 
+                  className="min-h-48 flex flex-col items-center justify-center text-center p-4 py-8"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4 }}
+                >
                   <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mb-4 animate-bounce-subtle">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -58,7 +85,7 @@ export default function Menfess() {
                   <p className="text-gray-600 dark:text-gray-300">
                     Thank you for sharing your thoughts. Your message has been sent anonymously.
                   </p>
-                </div>
+                </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="relative">
                   <div className="mb-5">
@@ -78,12 +105,14 @@ export default function Menfess() {
                     <div className="text-xs text-gray-500 dark:text-gray-400 italic">
                      *mwhehe:3
                     </div>
-                    <button
+                    <motion.button
                       type="submit"
                       className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-medium py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 shadow-md self-end"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
                       Send Menfess
-                    </button>
+                    </motion.button>
                   </div>
                 </form>
               )}
@@ -97,7 +126,7 @@ export default function Menfess() {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
