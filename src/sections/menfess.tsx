@@ -90,7 +90,7 @@ export default function Menfess() {
               
               <div className="mt-8 pt-5 border-t border-gray-200 dark:border-gray-700">
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">What is Menfess?</h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                <p className="text-gray-600 dark:text-gray-300 text-sm text-justify">
                   Menfess (Message Confession) is an anonymous messaging service where senders can deliver messages
                   without revealing their identity. This feature allows you to express your thoughts, feelings,
                   or experiences without having to worry about judgment from others.

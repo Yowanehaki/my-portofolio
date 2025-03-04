@@ -268,7 +268,19 @@ nav {
 .animate-ping-slow {
   animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
 
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
 /*--------------------------------------------------------------
 # Responsive Styling
 --------------------------------------------------------------*/
@@ -287,38 +299,5 @@ nav {
 @screen lg {
   .container {
     @apply px-10;
-  }
-}
-
-/*--------------------------------------------------------------
-# Dark Mode
---------------------------------------------------------------*/
-@media (prefers-color-scheme: dark) {
-  body {
-    @apply bg-gradient-to-br from-gray-900 via-gray-800 to-indigo-900 text-gray-100;
-  }
-  
-  .card {
-    @apply bg-gray-800 border-gray-700;
-  }
-  
-  h2 {
-    @apply text-gray-200;
-  }
-  
-  p {
-    @apply text-gray-300;
-  }
-  
-  .form-control {
-    @apply bg-gray-800 border-gray-700 text-white;
-  }
-  
-  .btn-primary {
-    @apply hover:shadow-indigo-700/30;
-  }
-  
-  .divider {
-    @apply via-gray-600;
   }
 }

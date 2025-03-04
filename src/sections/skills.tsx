@@ -33,7 +33,7 @@ export default function Skills() {
         <div className="relative z-10">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white inline-block relative">
-              My Skills
+              Tech Skills
               <div className="absolute bottom-0 left-0 h-1 w-full bg-indigo-600 transform origin-left scale-x-0 transition-transform duration-500" 
                 style={{ transform: isVisible ? 'scaleX(1)' : 'scaleX(0)' }}></div>
             </h2>
