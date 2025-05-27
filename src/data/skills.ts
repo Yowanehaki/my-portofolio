@@ -130,8 +130,8 @@ const skills: Skill[] = [
     relatedSkills: ["HTML, CSS, JavaScript"]
   },
   {
-    name: "Java",
-    icon: "/icons/java-original.svg",
+    name: "Python",
+    icon: "/icons/python.svg",
     level: 70,
     category: SkillCategory.DESIGN,
     description: "UI/UX design, prototyping, and design systems.",
@@ -153,8 +153,8 @@ const skills: Skill[] = [
     relatedSkills: ["Version Control", "Collaboration", "CI/CD"]
   },
   {
-    name: "Typescript",
-    icon: "/icons/typescript-original.svg",
+    name: "Flutter",
+    icon: "/icons/flutter.svg",
     level: 75,
     category: SkillCategory.FRONTEND,
     description: "Unit testing, component testing, and test-driven development.",

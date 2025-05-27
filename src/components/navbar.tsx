@@ -4,13 +4,11 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence, SVGMotionProps } from "framer-motion";
-// Removed unused import: import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-  // Removed unused variable: const pathname = usePathname();
 
   // Deteksi scroll untuk mengubah style navbar saat scrolling
   useEffect(() => {
@@ -24,8 +22,18 @@ export default function Navbar() {
 
     // Deteksi active section berdasarkan scroll position
     const handleSectionDetection = () => {
-      const sections = ["home", "about", "projects", "skills", "menfess"];
+      const sections = ["home", "about", "projects", "skills", "contactme"];
       const scrollPosition = window.scrollY + 100;
+      
+      // Get window height untuk deteksi bottom
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      // Jika hampir di bottom, set ke contactme
+      if (scrollPosition + windowHeight >= documentHeight - 100) {
+        setActiveSection("contactme");
+        return;
+      }
       
       // Default ke home jika di bagian paling atas
       if (scrollPosition < 300) {
@@ -33,8 +41,9 @@ export default function Navbar() {
         return;
       }
 
-      // Cek section lain
-      for (const section of sections) {
+      // Cek section lain dari bawah ke atas
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
         if (section === "home") continue; // Skip home karena sudah ditangani di atas
         
         const element = document.getElementById(section);
@@ -42,7 +51,7 @@ export default function Navbar() {
           const offsetTop = element.offsetTop;
           const height = element.offsetHeight;
 
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
+          if (scrollPosition >= offsetTop - 200 && scrollPosition < offsetTop + height) {
             setActiveSection(section);
             return;
           }
@@ -95,19 +104,122 @@ export default function Navbar() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-lg py-3" 
-          : "bg-transparent py-5"
+          ? "py-3" 
+          : "py-5"
       }`}
     >
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center">
+        {/* Desktop Layout */}
+        <div className="hidden lg:flex justify-between items-center">
           {/* Logo & Nama */}
+          <Link href="/" className="flex items-center space-x-3 group">
+            <div className="relative">
+              {/* Div pertama: Menghilangkan gradient background */}
+              <div className="absolute -inset-1 rounded-lg blur-sm group-hover: transition duration-300"></div>
+
+              {/* Div kedua: Tetap sama tapi Image dibuat transparan */}
+              <div className="relative w-10 h-10 rounded-lg flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-300 overflow-hidden">
+                <Image 
+                  src="/image.png" 
+                  alt="HAZART Logo" 
+                  width={40}
+                  height={40}
+                  className="opacity-50" // Menambahkan opacity untuk membuat transparan
+                />
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xl font-bold text-gray-800 dark:text-white tracking-tight"></span>
+            </div>
+          </Link>
+
+          {/* Menu Desktop - Centered */}
+          <div className={`flex items-center space-x-1 transition-all duration-300 ${
+            isScrolled 
+              ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg shadow-xl border border-gray-200/20 dark:border-gray-700/30 rounded-2xl px-6 py-3" 
+              : "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg border border-gray-200/30 dark:border-gray-700/40 rounded-2xl px-6 py-3"
+          }`}>
+            {navLinks.map((link) => (
+              <Link 
+                key={link.href}
+                href={link.href}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 relative group
+                  ${activeSection === link.href.substring(1) 
+                    ? "text-indigo-600 dark:text-indigo-400" 
+                    : "text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
+                  }`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const sectionId = link.href.substring(1);
+                  
+                  // Handle home section - scroll to top
+                  if (sectionId === 'home') {
+                    window.scrollTo({ 
+                      top: 0, 
+                      behavior: 'smooth' 
+                    });
+                    return;
+                  }
+                  
+                  const element = document.getElementById(sectionId);
+                  if (element) {
+                    element.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }
+                }}
+              >
+                {link.text}
+                {activeSection === link.href.substring(1) ? (
+                  <motion.span 
+                    layoutId="activeSection"
+                    className="absolute inset-0 bg-indigo-50 dark:bg-indigo-900/20 rounded-full -z-10"
+                  />
+                ) : (
+                  <span className="absolute inset-0 bg-transparent group-hover:bg-gray-50 dark:group-hover:bg-gray-800/30 rounded-full -z-10 transition-colors duration-300"></span>
+                )}
+              </Link>
+            ))}
+          </div>
+
+          {/* Contact Me Button - Right Side */}
+          <div className="flex-shrink-0">
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
+              <Link 
+                href="#contactme"
+                className="relative px-6 py-2.5 bg-white dark:bg-gray-900 text-indigo-600 dark:text-indigo-400 rounded-full font-medium group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-all duration-300 border border-indigo-200 dark:border-indigo-800 shadow-lg inline-block"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.getElementById('contactme');
+                  if (element) {
+                    element.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }
+                }}
+              >
+                Contact Me
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Navbar */}
+        <div className={`lg:hidden flex justify-between items-center transition-all duration-300 ${
+          isScrolled 
+            ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-lg py-3" 
+            : "bg-transparent py-5"
+        }`}>
+          {/* Logo & Nama Mobile */}
           <Link href="/" className="flex items-center space-x-3 group">
             <div className="relative">
               <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-70 blur-sm group-hover:opacity-100 transition duration-300"></div>
               <div className="relative w-10 h-10 rounded-lg flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-300 overflow-hidden">
                 <Image 
-                  src="/favicon.png" 
+                  src="/image.png" 
                   alt="HAZART Logo" 
                   width={40}
                   height={40}
@@ -121,44 +233,9 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Menu Desktop */}
-          <div className="hidden lg:flex items-center space-x-1">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.href}
-                href={link.href}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 relative group
-                  ${activeSection === link.href.substring(1) 
-                    ? "text-indigo-600 dark:text-indigo-400" 
-                    : "text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
-                  }`}
-              >
-                {link.text}
-                {activeSection === link.href.substring(1) ? (
-                  <motion.span 
-                    layoutId="activeSection"
-                    className="absolute inset-0 bg-indigo-50 dark:bg-indigo-900/20 rounded-full -z-10"
-                  />
-                ) : (
-                  <span className="absolute inset-0 bg-transparent group-hover:bg-gray-50 dark:group-hover:bg-gray-800/30 rounded-full -z-10 transition-colors duration-300"></span>
-                )}
-              </Link>
-            ))}
-            
-            {/* Tombol Kontak */}
-            <Link href="#menfess" className="ml-4">
-              <div className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
-                <button className="relative px-5 py-2 bg-white dark:bg-gray-900 text-indigo-600 dark:text-indigo-400 rounded-full font-medium group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-all duration-300">
-                  Send Menfess
-                </button>
-              </div>
-            </Link>
-          </div>
-
           {/* Tombol Menu Mobile */}
           <button 
-            className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800" 
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800" 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Menu"
           >
@@ -223,7 +300,28 @@ export default function Navbar() {
                           ? "bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400" 
                           : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/30"
                       }`}
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setIsMenuOpen(false);
+                        const sectionId = link.href.substring(1);
+                        
+                        // Handle home section - scroll to top
+                        if (sectionId === 'home') {
+                          window.scrollTo({ 
+                            top: 0, 
+                            behavior: 'smooth' 
+                          });
+                          return;
+                        }
+                        
+                        const element = document.getElementById(sectionId);
+                        if (element) {
+                          element.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                          });
+                        }
+                      }}
                     >
                       {getLinkIcon(link.href.substring(1))}
                       <span>{link.text}</span>
@@ -238,14 +336,24 @@ export default function Navbar() {
                   className="pt-2 mt-2 border-t border-gray-100 dark:border-gray-700"
                 >
                   <Link 
-                    href="#menfess" 
+                    href="#contactme" 
                     className="flex items-center justify-center space-x-2 w-full py-3 text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl font-medium"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMenuOpen(false);
+                      const element = document.getElementById('contactme');
+                      if (element) {
+                        element.scrollIntoView({ 
+                          behavior: 'smooth',
+                          block: 'start'
+                        });
+                      }
+                    }}
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                     </svg>
-                    <span>Send Menfess</span>
+                    <span>Contact Me</span>
                   </Link>
                 </motion.div>
               </motion.div>

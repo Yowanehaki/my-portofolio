@@ -3,7 +3,7 @@ import Hero from "@/sections/hero";
 import About from "@/sections/about";
 import Projects from "@/sections/projects";
 import Skills from "@/sections/skills";
-import Menfess from "@/sections/menfess";
+import Contactme from "@/sections/contactme";
 
 export default function Page() {
   return (
@@ -12,7 +12,7 @@ export default function Page() {
       <About />
       <Projects />
       <Skills />
-      <Menfess />
+      <Contactme />
     </>
   );
 }

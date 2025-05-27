@@ -11,7 +11,6 @@ interface Project {
   title: string;
   description: string;
   image: string;
-  link: string;
   github?: string;
   featured?: boolean;
   completionDate?: string;
@@ -136,12 +135,7 @@ export default function Projects() {
                 
                 <div className="flex justify-between items-center">
                   <motion.a 
-                    href={project.link}
-                    className="inline-flex items-center text-sm text-indigo-600 dark:text-indigo-400 font-medium hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
-                    whileHover={{ x: 3 }}
-                    whileTap={{ scale: 0.97 }}
                   >
-                    View Project
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>

@@ -6,7 +6,6 @@ export interface Project {
   title: string;
   description: string;
   image: string;
-  link: string;
   github?: string;
   featured?: boolean;
   completionDate?: string;
@@ -16,31 +15,28 @@ export interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "Portfolio Website",
-    description: "A sleek and modern portfolio website built with Next.js and Tailwind CSS.",
-    image: "/project1.jpg",
-    link: "https://yourportfolio.com",
-    github: "https://github.com/yourusername/portfolio",
+    title: "Proyek Kapita Selekta Informatika",
+    description: "Website edukasi tentang lingkungan pada desa",
+    image: "/project1.png",
+    github: "https://github.com/Yowanehaki/Web_KSI",
     featured: true,
     completionDate: "2023-11-15",
   },
   {
     id: 2,
-    title: "E-commerce Platform",
-    description: "A full-stack e-commerce application with authentication and payment integration.",
-    image: "/project2.jpg",
-    link: "https://myecommerce.com",
-    github: "https://github.com/yourusername/ecommerce",
+    title: "Proyek Pemrograman Berorientasi Objek",
+    description: "Game berbasis Python.",
+    image: "/project2.png",
+    github: "https://github.com/Yowanehaki/Tetap-Hidup-Adventure-Game-Interaktif",
     featured: true,
     completionDate: "2024-01-20",
     client: "Fashion Boutique Inc.",
   },
   {
     id: 3,
-    title: "Task Management App",
-    description: "A productivity application for organizing tasks with real-time collaboration features.",
+    title: "Proyek Sistem Tertanam",
+    description: "Alat IoT memonitoring tanaman Hidroponik.",
     image: "/project3.jpg",
-    link: "https://taskmaster.app",
     github: "https://github.com/yourusername/taskmanager",
     featured: false,
     completionDate: "2023-09-10",
@@ -48,11 +44,10 @@ const projects: Project[] = [
   },
   {
     id: 4,
-    title: "Weather Dashboard",
-    description: "An interactive weather dashboard providing real-time forecasts and historical data visualization.",
+    title: "Proyek Pengembangan Aplikasi Mobile",
+    description: "Aplikasi untuk monitoring tugas akhir Mahasiswa.",
     image: "/project4.jpg",
-    link: "https://weathernow.app",
-    github: "https://github.com/yourusername/weather-dashboard",
+    github: "https://github.com/Yowanehaki/Tamate_App",
     featured: false,
     completionDate: "2023-07-05",
   }

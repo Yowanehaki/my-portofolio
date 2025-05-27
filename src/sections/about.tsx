@@ -7,7 +7,6 @@ import Image from 'next/image'; // Import Next.js Image component
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
   const [imageScale, setImageScale] = useState(0.8); // Changed initial value to 0.8 to match usage
-  const skills = ['FE','IT Enthusiast','UI/UX'];
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -54,16 +53,7 @@ export default function About() {
             </p>
             
             <div className="pt-3">
-              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3">Interest</h3>
               <div className="flex flex-wrap gap-2">
-                {skills.map((skill, index) => (
-                  <span 
-                    key={index}
-                    className="px-3 py-1.5 bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200 rounded-full text-sm font-medium"
-                  >
-                    {skill}
-                  </span>
-                ))}
               </div>
             </div>
           </motion.div>
