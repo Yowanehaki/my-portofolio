@@ -97,48 +97,31 @@ export default function Navbar() {
   ];
 
   return (
-    <motion.nav 
-      initial="hidden"
-      animate="visible"
-      variants={navbarVariants}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? "py-3" 
-          : "py-5"
-      }`}
-    >
+    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
       <div className="container mx-auto px-4">
         {/* Desktop Layout */}
         <div className="hidden lg:flex justify-between items-center">
-          {/* Logo & Nama */}
+          {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
             <div className="relative">
-              {/* Div pertama: Menghilangkan gradient background */}
-              <div className="absolute -inset-1 rounded-lg blur-sm group-hover: transition duration-300"></div>
-
-              {/* Div kedua: Tetap sama tapi Image dibuat transparan */}
               <div className="relative w-10 h-10 rounded-lg flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-300 overflow-hidden">
                 <Image 
                   src="/image.png" 
                   alt="HAZART Logo" 
                   width={40}
                   height={40}
-                  className="opacity-50" // Menambahkan opacity untuk membuat transparan
+                  className="opacity-50"
                 />
               </div>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-bold text-gray-800 dark:text-white tracking-tight"></span>
             </div>
           </Link>
 
           {/* Menu Desktop - Centered */}
-          <div className={`flex items-center space-x-1 transition-all duration-300 ${
-            isScrolled 
-              ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg shadow-xl border border-gray-200/20 dark:border-gray-700/30 rounded-2xl px-6 py-3" 
-              : "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg border border-gray-200/30 dark:border-gray-700/40 rounded-2xl px-6 py-3"
-          }`}>
+          <div className={`flex items-center space-x-1 transition-all duration-300 px-6 py-3 
+            ${isScrolled 
+              ? "border border-gray-200/20 dark:border-gray-700/30 rounded-2xl" 
+              : "border border-gray-200/10 dark:border-gray-700/20 rounded-2xl"
+            }`}>
             {navLinks.map((link) => (
               <Link 
                 key={link.href}
@@ -152,7 +135,6 @@ export default function Navbar() {
                   e.preventDefault();
                   const sectionId = link.href.substring(1);
                   
-                  // Handle home section - scroll to top
                   if (sectionId === 'home') {
                     window.scrollTo({ 
                       top: 0, 
@@ -183,7 +165,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Contact Me Button - Right Side */}
+          {/* Contact Me Button */}
           <div className="flex-shrink-0">
             <div className="relative group">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
@@ -208,38 +190,33 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Navbar */}
-        <div className={`lg:hidden flex justify-between items-center transition-all duration-300 ${
-          isScrolled 
-            ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-lg py-3" 
-            : "bg-transparent py-5"
-        }`}>
+        <div className="lg:hidden flex justify-between items-center transition-all duration-300">
           {/* Logo & Nama Mobile */}
-          <Link href="/" className="flex items-center space-x-3 group">
+          <Link href="/" className="flex items-center space-x-2 group">
             <div className="relative">
-              <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-70 blur-sm group-hover:opacity-100 transition duration-300"></div>
-              <div className="relative w-10 h-10 rounded-lg flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-300 overflow-hidden">
+              <div className="relative w-7 h-7 rounded-lg flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-300">
                 <Image 
                   src="/image.png" 
                   alt="HAZART Logo" 
-                  width={40}
-                  height={40}
-                  className="w-full h-full object-cover"
+                  width={28}
+                  height={28}
+                  className="w-full h-full object-cover opacity-80 dark:opacity-100"
                 />
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-gray-800 dark:text-white tracking-tight">HAZART</span>
-              <span className="text-xs text-gray-500 dark:text-gray-400 -mt-1">portofolio</span>
+              <span className="text-base font-bold text-gray-800 dark:text-white tracking-tight">HAZART</span>
+              <span className="text-[10px] text-gray-500 dark:text-gray-400 -mt-0.5">portofolio</span>
             </div>
           </Link>
 
           {/* Tombol Menu Mobile */}
           <button 
-            className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800" 
+            className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700" 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Menu"
           >
-            <svg width="20" height="20" viewBox="0 0 23 23">
+            <svg width="18" height="18" viewBox="0 0 23 23" className="text-gray-700 dark:text-white">
               <Path
                 animate={isMenuOpen ? "open" : "closed"}
                 initial={false}
@@ -247,6 +224,7 @@ export default function Navbar() {
                   closed: { d: "M 2 2.5 L 20 2.5", stroke: "currentColor" },
                   open: { d: "M 3 16.5 L 17 2.5", stroke: "currentColor" }
                 }}
+                strokeWidth={2}
               />
               <Path
                 d="M 2 9.5 L 20 9.5"
@@ -265,6 +243,7 @@ export default function Navbar() {
                   closed: { d: "M 2 16.5 L 20 16.5", stroke: "currentColor" },
                   open: { d: "M 3 2.5 L 17 16.5", stroke: "currentColor" }
                 }}
+                strokeWidth={2}
               />
             </svg>
           </button>
@@ -361,7 +340,7 @@ export default function Navbar() {
           )}
         </AnimatePresence>
       </div>
-    </motion.nav>
+    </nav>
   );
 }
 

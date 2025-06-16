@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: 'class',
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -13,10 +14,10 @@ const config: Config = {
         'bounce-subtle': 'bounce 3s infinite',
       },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: "#2563eb", // Warna biru utama
-        secondary: "#1e293b", // Warna abu-abu gelap
+        secondary: "#1e293b", // Warna abu-abu gelapy
         accent: "#e11d48", // Warna aksen merah
       },
       fontFamily: {

@@ -23,7 +23,7 @@ export const metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${montserrat.variable} scroll-smooth`}>
+    <html lang="en" className={`${montserrat.variable} scroll-smooth dark`}>
       <body className="flex flex-col min-h-screen bg-gradient-to-br from-blue-50 via-gray-100 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
         {/* Skip to content for accessibility */}
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-white focus:text-blue-600 focus:z-50">
